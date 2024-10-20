@@ -43,3 +43,29 @@ interface Cat : Animal {
     }
 }
 
+// ------------Реализация интерфейсов-------
+
+class Husky(
+    override val weight: Int,
+    override val age: Int,
+    override val bite: BiteType
+) : Dog
+
+class Corgi(
+    override val weight: Int,
+    override val age: Int,
+    override val bite: BiteType
+) : Dog
+
+class ScottishFold(
+    override val weight: Int,
+    override val age: Int,
+    override val behavior: BehaviorType
+) : Cat
+
+class Siamese(
+    override val weight: Int,
+    override val age: Int,
+    override val behavior: BehaviorType
+) : Cat
+
