@@ -69,3 +69,36 @@ class Siamese(
     override val behavior: BehaviorType
 ) : Cat
 
+// ------------Класс магазина------------
+
+class ZooShop {
+
+    // Метод для определения породы животного и возврата её описания
+    fun identifyBreed(animal: Animal): String {
+        return when (animal) {
+            is Husky -> "Собака: Хаски, ${animal.describe()}"
+            is Corgi -> "Собака: Корги, ${animal.describe()}"
+            is ScottishFold -> "Кошка: Шотландская вислоухая, ${animal.describe()}"
+            is Siamese -> "Кошка: Сиамская, ${animal.describe()}"
+            else -> "Неизвестная порода"
+        }
+    }
+}
+
+// ------------MAIN------------
+
+fun main() {
+    val petStore = ZooShop()
+
+    val husky = Husky(weight = 23, age = 5, bite = BiteType.OVERBITE)
+    val corgi = Corgi(weight = 12, age = 3, bite = BiteType.STRAIGHT)
+    val siamese = Siamese(weight = 8, age = 6, behavior = BehaviorType.PASSIVE)
+    val scottishFold = ScottishFold(weight = 7, age = 4, behavior = BehaviorType.ACTIVE)
+
+    // Вывод информации о породах
+    println(petStore.identifyBreed(husky))
+    println(petStore.identifyBreed(corgi))
+    println(petStore.identifyBreed(siamese))
+    println(petStore.identifyBreed(scottishFold))
+}
+
