@@ -47,27 +47,31 @@ interface Cat : Animal {
 
 class Husky(
     override val weight: Int,
-    override val age: Int,
-    override val bite: BiteType
-) : Dog
+    override val age: Int
+) : Dog {
+    override val bite: BiteType = BiteType.OVERBITE
+}
 
 class Corgi(
     override val weight: Int,
-    override val age: Int,
-    override val bite: BiteType
-) : Dog
+    override val age: Int
+) : Dog {
+    override val bite: BiteType = BiteType.STRAIGHT
+}
 
 class ScottishFold(
     override val weight: Int,
     override val age: Int,
-    override val behavior: BehaviorType
-) : Cat
+) : Cat {
+    override val behavior: BehaviorType = BehaviorType.ACTIVE
+}
 
 class Siamese(
     override val weight: Int,
     override val age: Int,
-    override val behavior: BehaviorType
-) : Cat
+) : Cat {
+    override val behavior: BehaviorType = BehaviorType.PASSIVE
+}
 
 // ------------Класс магазина------------
 
@@ -90,10 +94,11 @@ class ZooShop {
 fun main() {
     val petStore = ZooShop()
 
-    val husky = Husky(weight = 23, age = 5, bite = BiteType.OVERBITE)
-    val corgi = Corgi(weight = 12, age = 3, bite = BiteType.STRAIGHT)
-    val siamese = Siamese(weight = 8, age = 6, behavior = BehaviorType.PASSIVE)
-    val scottishFold = ScottishFold(weight = 7, age = 4, behavior = BehaviorType.ACTIVE)
+    val husky = Husky(weight = 23, age = 5)
+    val corgi = Corgi(weight = 12, age = 3)
+    val siamese = Siamese(weight = 8, age = 6)
+    val scottishFold = ScottishFold(weight = 7, age = 4)
+
 
     // Вывод информации о породах
     println(petStore.identifyBreed(husky))
