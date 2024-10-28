@@ -1,18 +1,13 @@
-package com.tbankeducation.applicationwithjokes
+package com.tbankeducation.applicationwithjokes.recycler.adapter
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.tbankeducation.applicationwithjokes.data.Joke
-import com.tbankeducation.applicationwithjokes.databinding.ActivityMainBinding
-import com.tbankeducation.applicationwithjokes.recycler.adapter.JokeListAdapter
-import com.tbankeducation.applicationwithjokes.recycler.util.JokeItemDiffCallback
+import com.tbankeducation.applicationwithjokes.databinding.JokeItemBinding
+import com.tbankeducation.applicationwithjokes.recycler.JokeViewHolder
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
-    private val adapter by lazy { JokeListAdapter(JokeItemDiffCallback()) }
+class JokeAdapter : RecyclerView.Adapter<JokeViewHolder>() {
 
     private val data = listOf(
         Joke(
@@ -52,17 +47,17 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = JokeItemBinding.inflate(inflater, parent, false)
 
-        initRecyclerView()
+        return JokeViewHolder(binding)
     }
 
-    private fun initRecyclerView() {
-        adapter.submitList(data)
-        binding.jokesRecyclerView.adapter = adapter
-        binding.jokesRecyclerView.layoutManager = LinearLayoutManager(this)
+    override fun getItemCount(): Int = data.size
+
+    // вызывается при скроллинге
+    override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
+        holder.bind(data[position])
     }
 }
